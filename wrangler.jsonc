@@ -1,0 +1,7 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "boma-skills",
+  "compatibility_date": "2026-10-03",
+  "assets": { "directory": "./dist" },
+  "routes": [{ "pattern": "skill.bomajosiah.com", "custom_domain": true }]
+}

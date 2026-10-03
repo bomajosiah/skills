@@ -1,0 +1,18 @@
+{
+  "repository": "bomajosiah/skills",
+  "branch": "main",
+  "author": "Boma Josiah",
+  "domain": "skill.bomajosiah.com",
+  "groups": [
+    {
+      "title": "Information architecture",
+      "description": "Give your product a structure people can understand. Decide what belongs where, how things connect, and how people move through it.",
+      "skills": {
+        "do-ia": "Design a new product’s structure before you start composing screens.",
+        "review-ia": "Review an existing structure and find what makes it hard to navigate or understand.",
+        "improve-ia": "Restructure an existing product while preserving what already works.",
+        "ia-vocabulary": "Find the precise term for the interface pattern you’re trying to describe."
+      }
+    }
+  ]
+}
