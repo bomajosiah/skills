@@ -26,3 +26,17 @@ test("runs as a CLI through a symlinked skill folder", async () => {
   fs.rmSync(tmp, { recursive: true, force: true });
   assert.match(out, /smells: 0 candidates/);
 });
+
+// Exceptions apply to every rule, including the per-file C7 counts.
+test("config exceptions apply to C7", async () => {
+  const fs = await import("node:fs");
+  const os = await import("node:os");
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "smells-"));
+  fs.mkdirSync(path.join(tmp, "ui"));
+  fs.writeFileSync(path.join(tmp, "ui", "Box.tsx"), 'export const Box = () => <div style={{ color: "var(--ink)" }} />;\n');
+  fs.writeFileSync(path.join(tmp, "smells.config.json"), JSON.stringify({ exceptions: [{ rule: "C7", path: "^ui/", why: "token-only inline styles" }] }));
+  const r = scanSmells(tmp);
+  fs.rmSync(tmp, { recursive: true, force: true });
+  assert.equal(r.counts.C7 ?? 0, 0);
+  assert.ok(r.findings.some((f) => f.rule === "C7" && f.excepted));
+});

@@ -184,7 +184,8 @@ export function scanSmells(root, { config } = {}) {
   }
 
   for (const f of inline.sort((a, b) => b.styles + b.hex - (a.styles + a.hex))) {
-    for (let i = 0; i < f.styles + f.hex; i++) findings.push({ rule: "C7", file: f.file, line: 0, text: `${f.styles} inline styles, ${f.hex} raw colors`, count: true });
+    const ex = cfg.exceptions.find((x) => x.rule === "C7" && x.path.test(f.file));
+    for (let i = 0; i < f.styles + f.hex; i++) findings.push({ rule: "C7", file: f.file, line: 0, text: `${f.styles} inline styles, ${f.hex} raw colors`, count: true, ...(ex ? { excepted: ex.why || true } : {}) });
   }
 
   const counts = {};
