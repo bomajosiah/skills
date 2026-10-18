@@ -52,8 +52,8 @@ The repository must be published before these commands work for other people.
 
 ## Add a skill
 
-1. Add `skills/<skill-name>/SKILL.md` with YAML `name` and `description`. Keep supporting references inside its own skill folder so it installs independently.
-2. Run `npm run build`. New folders appear under “More skills” automatically.
+1. Add `skills/<skill-name>/SKILL.md` with YAML `name` and `description`. Keep supporting references inside its own skill folder so it installs independently. Files shared by several skills live in `shared/` and are listed in `shared/manifest.json`; the build copies them in, so edit the `shared/` copy and commit the copies the build produces.
+2. Run `npm run build` (and `npm test` if you touched the scanner). New folders appear under “More skills” automatically.
 3. To group it, add a category or an entry in `site/config.json`. Keys must match skill folder names; values are the short descriptions on the page.
 4. Commit and push. Deploy manually with `npm run deploy`, or let Workers Builds deploy.
 

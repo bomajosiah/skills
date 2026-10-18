@@ -1,16 +1,18 @@
 # Boma’s Skills
 
-A growing collection of agent skills for designers and engineers. The first collection focuses on making AI-built products structurally coherent before visual polish.
+A growing collection of agent skills for designers and engineers, for making AI-built products that feel designed. Two suites so far: **structure** (information architecture) and **surface** (UI without the AI smells).
 
 ## Install
-
-After the repository is published:
 
 ```sh
 npx skills add bomajosiah/skills
 ```
 
-Choose a skill and your agent interactively, or install one with `npx skills add bomajosiah/skills --skill do-ia`.
+Choose skills and your agent interactively, or install some by name:
+
+```sh
+npx skills add bomajosiah/skills --skill review-ui --skill improve-ui
+```
 
 The landing page is prepared for `skill.bomajosiah.com`. See [PUBLISHING.md](PUBLISHING.md) for publishing, previewing, and adding more skills.
 
@@ -25,10 +27,33 @@ The suite separates four jobs that are often conflated:
 
 This separation is intentional. A construction skill should make decisions. A review skill should find failures. An improvement skill should restructure what already exists. A vocabulary skill should name things precisely without pretending to design them.
 
-## Suggested install / repo layout
+## Interface
+
+The second suite works on the surface, after the structure is right. It targets the patterns that make an interface read as agent-made: eyebrow text, narrating captions, design reasoning on screen, literary headings, card soup.
+
+- `do-ui`: compose new screens with a copy budget and help in the right places.
+- `review-ui`: find the smells and the system choices that keep producing them. Read-only.
+- `improve-ui`: fix the cause (component APIs, rules, missing sinks), sweep the screens, ratchet.
+- `ui-vocabulary`: name UI and help patterns precisely (eyebrow, toggletip, coach mark, spotlight).
+
+The shared references are canonical in `shared/ui/` (`SMELLS.md`: the catalog; `SINKS.md`: where information goes instead) and copied into each skill at build time (`shared/manifest.json`). Edit them there, not in the skill folders. `shared/ui/scripts/smells.mjs` is the scanner, bundled into `do-ui`, `review-ui` and `improve-ui` as `scripts/smells.mjs`. It has no dependencies and can be copied into any repo for CI. Its tests (`npm test`) check that every rule fires on a bad fixture and stays silent on a clean one. Tools like UX Mapper can call an installed copy, but the skills don't depend on them.
+
+**Information goes somewhere.** Removing narration only sticks if the system has a place for the information: an info tip, a walkthrough, an empty state, a decision record.
+
+## Repo layout
 
 ```text
+shared/ui/              canonical SMELLS.md, SINKS.md, scripts/smells.mjs
+shared/manifest.json    which shared files each skill gets at build time
+tests/                  scanner fixtures: bad/ must fire, clean/ must stay silent
 skills/
+  do-ui/ review-ui/ improve-ui/
+    SKILL.md
+    SMELLS.md SINKS.md  (copied from shared/)
+    scripts/smells.mjs  (copied from shared/)
+  ui-vocabulary/
+    SKILL.md
+    GLOSSARY.md
   do-ia/
     SKILL.md
     FRAMEWORK.md
@@ -56,7 +81,9 @@ When several skills are available:
 3. Existing structure, asked to make it better: `improve-ia`
 4. User is trying to name a pattern/concept: `ia-vocabulary`
 
-Do not run all four by default.
+Then the surface, the same way: `do-ui` for new screens, `review-ui` to critique, `improve-ui` to fix, `ui-vocabulary` to name things. Structure comes first. Polishing a screen that's in the wrong place is wasted work.
+
+Don't run every skill by default.
 
 ## Core philosophy
 

@@ -1,0 +1,21 @@
+{
+  "do-ui": [
+    "ui/SMELLS.md",
+    "ui/SINKS.md",
+    "ui/scripts/smells.mjs"
+  ],
+  "review-ui": [
+    "ui/SMELLS.md",
+    "ui/SINKS.md",
+    "ui/scripts/smells.mjs"
+  ],
+  "improve-ui": [
+    "ui/SMELLS.md",
+    "ui/SINKS.md",
+    "ui/scripts/smells.mjs"
+  ],
+  "ui-vocabulary": [
+    "ui/SMELLS.md",
+    "ui/SINKS.md"
+  ]
+}

@@ -13,6 +13,16 @@
         "improve-ia": "Restructure an existing product while preserving what already works.",
         "ia-vocabulary": "Find the precise term for the interface pattern you’re trying to describe."
       }
+    },
+    {
+      "title": "Interface",
+      "description": "Make the surface read as designed, not generated. Labels instead of narration, help where people look for it, and checks that keep it that way.",
+      "skills": {
+        "do-ui": "Compose new screens without narration, with help in info tips and walkthroughs.",
+        "review-ui": "Find the AI smells in an interface and what keeps producing them.",
+        "improve-ui": "Remove the smells at the source, move what matters to the right place, and lock it in.",
+        "ui-vocabulary": "Find the precise name for an interface or help pattern."
+      }
     }
   ]
 }
