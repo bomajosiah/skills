@@ -77,6 +77,11 @@ Fix the cause, or the smell comes back on the next screen.
 **Spot:** "Certainly!", "Great question", "I hope this helps", "As an AI…" in UI strings or AI-feature output shown to users.
 **Instead:** strip it in the output pipeline; the product voice is the shop's, not the model's.
 
+### A12 · Raw identifiers on screen · FIX
+**Spot:** enum keys, state machine names and internal actors in user-facing text: `staff_bench`, "moved from ready to completed", "after taken of SR-2026-744.1", "by the system".
+**Why:** the data model is talking, not the product. Agents print what they have, and the field name is what they have.
+**Instead:** one mapping from every event, state and role to a human label, used everywhere (the timeline, notifications, exports). People by name; the product by name, not "the system".
+
 ## B. Voice: clever over clear
 
 ### B1 · Literary headings
@@ -174,6 +179,10 @@ Fix the cause, or the smell comes back on the next screen.
 ### C14 · Hero-metric template · FLAG
 **Spot:** huge number, small label, strip of supporting stats, gradient accent, used as the default top of a dashboard.
 **Instead:** lead with what needs action (a queue, the overdue list), not a vanity number.
+
+### C15 · Mixed numeric precision · FIX
+**Spot:** one figure shown at two precisions ("$82.50" in one column, "$83" in the next), counts as words in one place and numerals in another, currency with and without cents on one screen.
+**Instead:** one rule per context: cents everywhere in money tables, whole units only in summary tiles, numerals for counts, tabular figures in columns (Vercel's interface guidelines).
 
 ## D. Disclosure: help in the wrong place
 
