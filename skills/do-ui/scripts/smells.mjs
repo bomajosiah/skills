@@ -10,7 +10,7 @@
 //   --baseline-file <f>   --config <f> (default smells.config.json)   --quiet
 import fs from "node:fs";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 
 const SKIP_DIRS = new Set(["node_modules", ".git", ".ux", "dist", "build", "out", ".next", "coverage", "test-results", ".wrangler", "archive"]);
 const UI_EXT = /\.(tsx|jsx|vue|svelte|astro|html)$/;
@@ -275,7 +275,10 @@ export function runSmells(root, args = []) {
   return r;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] || "").href) {
+// Compare real paths: skill installers symlink the skill folder, so argv[1]
+// can name the link while import.meta.url names the target.
+const isMain = (() => { try { return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1]); } catch { return false; } })();
+if (isMain) {
   const args = process.argv.slice(2);
   const valued = new Set(["--out", "--baseline-file", "--config"]);
   const dir = args.find((a, i) => !a.startsWith("--") && !valued.has(args[i - 1]));
