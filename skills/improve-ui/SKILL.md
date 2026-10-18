@@ -36,6 +36,7 @@ In this order:
 
 ### 3. Sweep the screens
 For every instance, route the information. Don't just delete it:
+- **Sort before deleting.** Expect a third of eyebrows and captions to be data (item numbers, dates, amounts, counts): move them to a badge or a values-only slot. Swap inverted pairs (label above, data as title).
 - **Delete** what's obvious (A2, A3 "duh" cases, A7).
 - **Move to an info tip** what defines a metric or term (A1 definitions, C3, D2).
 - **Move to a decision record** what justifies a design (A5). Keep the reasoning: the team needs it, users don't.
@@ -47,6 +48,8 @@ For every instance, route the information. Don't just delete it:
 Work one surface type at a time (all page headers, then dashboard cards, then forms). Commit per surface type with the counts before and after.
 
 Keep a **relocation log** (`relocations.md`, kept with your other working notes): text removed → where it went (info tip on X, decision record Y, deleted). This is how the human checks nothing important disappeared.
+
+Re-check each fixed surface in the browser at every width. A smell can hide a second cause: removing an eyebrow that crushed a page title showed the title could still shrink to one letter, because the layout let it.
 
 ### 4. Lock it in
 - Copy `scripts/smells.mjs` into the repo's own `scripts/` and run `node scripts/smells.mjs . --check` in CI or pre-commit, with `smells.baseline.json` committed. It fails if any count rises above the baseline. Re-baseline after each sweep so the ratchet tightens.

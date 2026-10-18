@@ -26,7 +26,7 @@ Fix the cause, or the smell comes back on the next screen.
 **Spot:** small uppercase, letter-spaced text above a title on an app screen or card. `eyebrow=`, `kicker=`, `overline=` props; `textTransform: uppercase` with `letterSpacing`.
 **Example:** `YOUR VIEW ONLY / Sign in` · `LOAD IN MINUTES, NOT HEADCOUNT / By person` · `THE TILL, THE INVOICES, AND WHAT HAS GONE QUIET / Money`
 **Why:** it adds a second headline that is always read first, it's harder to read (uppercase plus tracking), and it gives every block the same anatomy, so nothing stands out. Well-designed operational dashboards don't do this.
-**Instead:** delete it. If it defines a metric, use an info tip. If it gives a count or state ("3 urgent"), put a badge or count next to the title. If it's a category, the navigation or breadcrumb already says so.
+**Instead:** sort each one before touching it. In practice about a third of "eyebrows" are **data in the wrong place**: an item number, a date, an amount, a count. That data moves to a badge beside the title, it isn't deleted. Where the data is the title and the label sits above it ("MON / 3", "PAYMENT PLATFORM / What takes the money"), swap them. A definition becomes an info tip. A category is already in the navigation or breadcrumb. What's left is narration: delete it.
 **Allowed:** on marketing pages, at most one per page, as a real category label of three words or fewer ("Pricing", "Case study"). Never a sentence.
 
 ### A2 · Restating caption
@@ -81,6 +81,10 @@ Fix the cause, or the smell comes back on the next screen.
 **Spot:** enum keys, state machine names and internal actors in user-facing text: `staff_bench`, "moved from ready to completed", "after taken of SR-2026-744.1", "by the system".
 **Why:** the data model is talking, not the product. Agents print what they have, and the field name is what they have.
 **Instead:** one mapping from every event, state and role to a human label, used everywhere (the timeline, notifications, exports). People by name; the product by name, not "the system".
+
+### A13 · Narration in other slots · FLAG
+**Spot:** commentary in a delta chip ("silence", "needs somebody", "check below"), a card footer that argues for the design ("The same computation as this screen, so the two can never disagree"), or a caption slot used half for values and half for sentences.
+**Instead:** a delta is a change or a status ("+12%", "not connected"). A footer is an action or a total. Where one slot mixes values and sentences, split it: keep a values-only slot (rename it, so every call site gets reviewed), and route the sentences.
 
 ## B. Voice: clever over clear
 

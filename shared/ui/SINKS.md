@@ -34,6 +34,7 @@ Specs short enough to build from. Use the system's primitives (Base UI, Radix, R
 - Content: one or two sentences, plain text, an optional "Learn more" link. If it needs a heading or a list, it's a help article.
 - Accessible name: "About {label}". Escape closes it, focus returns to the trigger.
 - One per label at most. If every label on a screen needs one, the labels are wrong.
+- **Render the panel in a portal**, positioned from the button. Cards usually clip their overflow (for edge-to-edge tables and photos), and a panel inside one gets cut off. Flip it above the button when there's no room below. Move focus into the panel on open; Escape, Tab past the end or a click outside closes it and returns focus.
 - Never holds what the user needs to complete the action (password rules, a required format). That goes inline. Never repeats the label (A9).
 
 ### Tooltip (different from an info tip)
@@ -82,6 +83,6 @@ Specs short enough to build from. Use the system's primitives (Base UI, Radix, R
 
 1. Add **Info tip**, **Empty state**, **System banner**, **Toast**, **Just-in-time tip**, **Walkthrough** and a **Help entry point** to the component registry, with when-to-use and when-not-to-use.
 2. Remove narration slots from component APIs (`eyebrow`, `description`, `subtitle` on cards and page headers), or restrict them to marketing components. A slot that exists gets filled.
-3. Give `PageHeader` / `Card` a typed `info` prop that renders an info tip next to the title. That turns the urge to explain into a sink instead of a sentence.
+3. Give `PageHeader` / `Card` a typed `info` prop that renders an info tip next to the title, and a `badge` prop for a short value beside it (a count, an item number, a date). Most "eyebrows" turn out to be one of the two. That turns the urge to explain into a sink instead of a sentence.
 4. Write the routing table above into the system's writing guidance and its `AGENTS.md`.
 5. Ratchet: run `node scripts/smells.mjs . --check` in CI so counts can only go down.

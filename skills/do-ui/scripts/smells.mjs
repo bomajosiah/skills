@@ -127,6 +127,11 @@ export function scanSmells(root, { config } = {}) {
     }
     if (/\.d\.ts$/.test(file)) continue;
 
+    if (!ui && !/\.d\.ts$/.test(file)) {
+      // Eyebrows also live in data: route tables and config objects in .ts files.
+      const objRe = new RegExp(`\\b(${EYEBROW})\\s*:\\s*(["'\`])([^"'\`]+)\\2`, "g");
+      let m; while ((m = objRe.exec(src))) add("A1", file, lineAt(src, m.index), `${m[1]}: ${m[3]}`);
+    }
     if (ui) {
       // A1 / A2: values passed into narration slots (props or object keys).
       const slotRe = new RegExp(`\\b(${EYEBROW}|${NARRATE})\\s*(=|:)\\s*`, "g");
